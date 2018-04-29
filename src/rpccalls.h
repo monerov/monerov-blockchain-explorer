@@ -81,7 +81,7 @@ class rpccalls
 
 public:
 
-    rpccalls(string _deamon_url = "http:://127.0.0.1:18081",
+    rpccalls(string _deamon_url = "http:://127.0.0.1:19091",
              uint64_t _timeout = 200000);
 
     bool
@@ -156,14 +156,14 @@ public:
 
             if (!err.empty())
             {
-                cerr << "Error connecting to Monero deamon due to "
+                cerr << "Error connecting to MoneroV deamon due to "
                      << err << endl;
                 return false;
             }
         }
         else
         {
-            cerr << "Error connecting to Monero deamon at "
+            cerr << "Error connecting to MoneroV deamon at "
                  << deamon_url << endl;
             return false;
         }
