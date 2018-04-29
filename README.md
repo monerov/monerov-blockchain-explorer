@@ -1,134 +1,68 @@
-# Onion Monero Blockchain Explorer
+# MoneroV Blockchain Explorer
 
-Currently available Monero blockchain explorers have several limitations which are of 
-special importance to privacy-oriented users:
-
- - they use JavaScript,
- - have images which might be used for [cookieless tracking](http://lucb1e.com/rp/cookielesscookies/),
- - track users activates through google analytics,
- - are closed sourced,
- - are not available as hidden services,
- - do not support Monero testnet nor stagenet networks,
- - have limited JSON API.
+The source code used for the [monerovexplorer.com](https://monerovexplorer.com) website. An implementation of a MoneroV blockchain explorer.
+Currently connected to the upcoming monerov daemon and showcases the MoneroV 1:10 blockchain ratio diffrence for all previous and
+live transactions on Monero mainnet.
 
 
-In this example, these limitations are addressed by development of
-an Onion Monero Blockchain Explorer. The example not only shows how to use 
-Monero C++ libraries, but also demonstrates how to use:
+## MoneroV Blockchain Explorer Features
 
- - [crow](https://github.com/ipkn/crow) - C++ micro web framework 
- - [mstch](https://github.com/no1msd/mstch) - C++ {{mustache}} templates
- - [json](https://github.com/nlohmann/json) - JSON for Modern C++
- - [fmt](https://github.com/fmtlib/fmt) - Small, safe and fast string formatting library
-
-## Addresses
-
-Tor users:
- 
- - [http://dvwae436pd7nt4bc.onion](http://dvwae436pd7nt4bc.onion) (Front-end templates are [maintained by @suhz](https://github.com/suhz/onion-monero-blockchain-explorer/tree/moneroexplorer.com/src/templates)).
-  
-Clearnet versions:
-
- - [https://xmrchain.net/](https://xmrchain.net/) - https enabled, most popular and very stable.
- - [https://MoneroExplorer.com/](https://moneroexplorer.com/) - nice looking one, https enabled.
- - [https://monerohash.com/explorer/](https://monerohash.com/explorer/) - nice looking one, https enabled.
- - [http://explore.MoneroWorld.com](http://explore.moneroworld.com) - same as the second one. 
- - [https://moneroexplorer.pro/](https://moneroexplorer.pro/) - nice looking one, https enabled.
- - [http://monerochain.com/](http://monerochain.com/) - JSON API based, multiple nodes.   
- - [https://blox.minexmr.com/](https://blox.minexmr.com/) - - https enabled.
-  
-Testnet version:
-
- - [http://nimis.serveo.net/](http://nimis.serveo.net/) - bleeding edge version (down currently).
- - [https://testnet.xmrchain.com/](https://testnet.xmrchain.com/) - https enabled.
- - [https://explorer.monero-otc.com/](https://explorer.monero-otc.com/) - https enabled.
- 
-Stagenet version:
-
- - [http://162.210.173.150:8083/](http://162.210.173.150:8083/) - recent version. 
-
-i2p users (main Monero network):
-
- - [http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/](http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/)
-
-Alternative block explorers:
-
-- [http://moneroblocks.info](http://moneroblocks.info/)
-- [https://monerobase.com](https://monerobase.com/)
-- [http://chainradar.com](http://chainradar.com/xmr/blocks)
-
- 
-## Onion Monero Blockchain Explorer features
-
-The key features of the Onion Monero Blockchain Explorer are:
-
- - no cookies, no web analytics trackers, no images,
- - by default no JavaScript, but can be enabled for client side decoding and proving transactions,
+ - no javascript, no cookies, no web analytics trackers, no images,
  - open sourced,
  - made fully in C++,
  - showing encrypted payments ID,
  - showing ring signatures,
  - showing transaction extra field,
- - showing public components of Monero addresses,
- - decoding which outputs and mixins belong to the given Monero address and viewkey,
- - can prove that you send Monero to someone,
- - detailed information about mixins, such as, mixins' age, timescale, mixin of mixins,
+ - showing public components of MoneroV addresses,
+ - decoding which outputs and mixins belong to the given MoneroV address and viewkey,
+ - can prove that you sent MoneroV (XMV) to someone,
+ - detailed information about mixins, such as, mixins'
+ age, timescale, mixin of mixins,
  - showing number of amount output indices,
- - support Monero testnet network,
  - tx checker and pusher for online pushing of transactions,
  - estimate possible spendings based on address and viewkey,
  - can provide total amount of all miner fees.
  - decoding encrypted payment id.
- - decoding outputs and proving txs sent to sub-address.
-
-
-## Development branch
-
-Current development branch:
-
- - https://github.com/moneroexamples/onion-monero-blockchain-explorer/tree/devel
- 
  
 
-## Compilation on Ubuntu 16.04
+## Compilation on Ubuntu 16.04 (Will only be available When the monerov daemon is released to the public)
 
-##### Compile latest Monero development version
+##### Compile latest MoneroV release v0.1
 
-Download and compile recent Monero into your home folder:
+Download and compile recent MoneroV into your home folder:
 
 ```bash
-# first install monero dependecines
+# first install monerov's dependecines
 sudo apt update
 
-sudo apt install git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev
+sudo apt install git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev
 
 # go to home folder 
 cd ~
 
-git clone --recursive https://github.com/monero-project/monero
+# clone the monerov daemon (when it's publicly available)
+git clone https://github.com/monerov/monerov
 
-cd monero/
+cd monerov/
 
-# checkout last monero version
-git checkout -b last_release v0.12.0.0
 
 make
 ```
 
 ##### Compile and run the explorer
 
-Once the Monero is compiles, the explorer can be downloaded and compiled
+Once MoneroV compiles, the explorer can be downloaded and compiled
 as follows:
 
 ```bash
-# go to home folder if still in ~/monero
+# go to home folder if you're still in ~/monerov
 cd ~
 
 # download the source code
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+git clone https://github.com/monerov/monerov-blockchain-explorer.git
 
 # enter the downloaded sourced code folder
-cd onion-monero-blockchain-explorer
+cd monerov-explorer
 
 # make a build folder and enter it
 mkdir build && cd build
@@ -136,11 +70,8 @@ mkdir build && cd build
 # create the makefile
 cmake ..
 
-# altearnatively can use: cmake -DMONERO_DIR=/path/to/monero_folder .. 
-# if monero is not in ~/monero
-#
-# also can build with ASAN (sanitizers), for example
-# cmake -DSANITIZE_ADDRESS=On ..
+# altearnatively can use: cmake -DMONERO_DIR=/path/to/monerov_folder .. 
+# if monerov is not in ~/monerov
 
 # compile
 make
@@ -156,25 +87,24 @@ To run it:
 ./xmrblocks
 ```
 
-By default it will look for blockchain in its default location i.e., `~/.bitmonero/lmdb`.
+By default it will look for blockchain in its default location i.e., `~/.monerov/lmdb`.
 You can use `--bc-path` option if its in different location. 
 Example output:
 
 ```bash
-[mwo@arch onion-monero-blockchain-explorer]$ ./xmrblocks
+[instanceme@monerov monerov-explorer]$ ./xmrblocks
 2016-May-28 10:04:49.160280 Blockchain initialized. last block: 1056761, d0.h0.m12.s47 time ago, current difficulty: 1517857750
 (2016-05-28 02:04:49) [INFO    ] Crow/0.1 server is running, local port 8081
 ```
 
-Go to your browser: http://127.0.0.1:8081
+Go to your browser: http://127.0.0.1:9091
 
 ## The explorer's command line options
 
 ```
-xmrblocks, Onion Monero Blockchain Explorer:
+xmrblocks, MoneroV Blockchain Explorer:
   -h [ --help ] [=arg(=1)] (=0)         produce help message
   -t [ --testnet ] [=arg(=1)] (=0)      use testnet blockchain
-  -s [ --stagenet ] [=arg(=1)] (=0)     use stagenet blockchain
   --enable-pusher [=arg(=1)] (=0)       enable signed transaction pusher
   --enable-mixin-details [=arg(=1)] (=0)
                                         enable mixin details for key images, 
@@ -184,29 +114,24 @@ xmrblocks, Onion Monero Blockchain Explorer:
                                         enable key images file checker
   --enable-output-key-checker [=arg(=1)] (=0)
                                         enable outputs key file checker
-  --enable-json-api [=arg(=1)] (=1)     enable JSON REST api
+  --enable-json-api arg (=1)            enable JSON REST api
   --enable-tx-cache [=arg(=1)] (=0)     enable caching of transaction details
   --show-cache-times [=arg(=1)] (=0)    show times of getting data from cache 
                                         vs no cache
   --enable-block-cache [=arg(=1)] (=0)  enable caching of block details
-  --enable-js [=arg(=1)] (=0)           enable checking outputs and proving txs
-                                        using JavaScript on client side
   --enable-autorefresh-option [=arg(=1)] (=0)
                                         enable users to have the index page on 
                                         autorefresh
   --enable-emission-monitor [=arg(=1)] (=0)
-                                        enable Monero total emission monitoring
+                                        enable MoneroV total emission monitoring
                                         thread
   -p [ --port ] arg (=8081)             default explorer port
   --testnet-url arg                     you can specify testnet url, if you run
-                                        it on mainnet or stagenet. link will 
-                                        show on front page to testnet explorer
-  --stagenet-url arg                    you can specify stagenet url, if you 
-                                        run it on mainnet or testnet. link will
-                                        show on front page to stagenet explorer
+                                        it on mainnet. link will show on front 
+                                        page to testnet explorer
   --mainnet-url arg                     you can specify mainnet url, if you run
-                                        it on testnet or stagenet. link will 
-                                        show on front page to mainnet explorer
+                                        it on testnet. link will show on front 
+                                        page to mainnet explorer
   --no-blocks-on-index arg (=10)        number of last blocks to be shown on 
                                         index page
   --mempool-info-timeout arg (=5000)    maximum time, in milliseconds, to wait 
@@ -214,30 +139,29 @@ xmrblocks, Onion Monero Blockchain Explorer:
   --mempool-refresh-time arg (=5)       time, in seconds, for each refresh of 
                                         mempool state
   -b [ --bc-path ] arg                  path to lmdb folder of the blockchain, 
-                                        e.g., ~/.bitmonero/lmdb
+                                        e.g., ~/.monerov/lmdb
   --ssl-crt-file arg                    path to crt file for ssl (https) 
                                         functionality
   --ssl-key-file arg                    path to key file for ssl (https) 
                                         functionality
-  -d [ --deamon-url ] arg (=http:://127.0.0.1:18081)
-                                        Monero deamon url
+  -d [ --deamon-url ] arg (=http:://127.0.0.1:19091)
+                                        MoneroV deamon url
 ```
 
 Example usage, defined as bash aliases.
 
 ```bash
 # for mainnet explorer
-alias xmrblocksmainnet='~/onion-monero-blockchain-explorer/build/xmrblocks    --port 8081 --testnet-url "http://139.162.32.245:8082" --enable-pusher --enable-emission-monitor'
+alias xmrblocksmainnet='~/monerov-explorer/build/xmrblocks    --port 8081 --testnet-url "http://122.112.5.45:8082" --enable-pusher --enable-emission-monitor'
 
 # for testnet explorer
-alias xmrblockstestnet='~/onion-monero-blockchain-explorer/build/xmrblocks -t --port 8082 --mainnet-url "http://139.162.32.245:8081" --enable-pusher --enable-emission-monitor'
+alias xmrblockstestnet='~/monerov-explorer/build/xmrblocks -t --port 8082 --mainnet-url "http://122.112.5.45:8081" --enable-pusher --enable-emission-monitor'
 ```
 
-These are aliases similar to those used for http://139.162.32.245:8081/ and http://139.162.32.245:8082/, respectively.
 
-## Enable Monero emission 
+## Enable MoneroV emission 
 
-Obtaining current Monero emission amount is not straight forward. Thus, by default it is 
+Obtaining current MoneroV emission amount is not straight forward. Thus, by default it is 
 disabled. To enable it use `--enable-emission-monitor` flag, e.g., 
 
 
@@ -249,14 +173,14 @@ This flag will enable emission monitoring thread. When started, the thread
  will initially scan the entire blockchain, and calculate the cumulative emission based on each block.
 Since it is a separate thread, the explorer will work as usual during this time. 
 Every 10000 blocks, the thread will save current emission in a file, by default, 
- in `~/.bitmonero/lmdb/emission_amount.txt`. For testnet or stagenet networks, 
- it is `~/.bitmonero/testnet/lmdb/emission_amount.txt` or `~/.bitmonero/stagenet/lmdb/emission_amount.txt`. This file is used so that we don't
+ in `~/.monerov/lmdb/emission_amount.txt`. For testnet network, 
+ it is `~/.monerov/testnet/lmdb/emission_amount.txt`. This file is used so that we don't
  need to rescan entire blockchain whenever the explorer is restarted. When the 
- explorer restarts, the thread will first check if `~/.bitmonero/lmdb/emission_amount.txt`
+ explorer restarts, the thread will first check if `~/.monerov/lmdb/emission_amount.txt`
  is present, read its values, and continue from there if possible. Subsequently, only the initial
  use of the tread is time consuming. Once the thread scans the entire blockchain, it updates
  the emission amount using new blocks as they come. Since the explorer writes this file, there can
- be only one instance of it running for mainnet, testnet and stagenet. Thus, for example, you cant have 
+ be only one instance of it running for mainnet and testnet. Thus, for example, you cant have 
  two explorers for mainnet
  running at the same time, as they will be trying to write and read the same file at the same time,
  leading to unexpected results. Off course having one instance for mainnet and one instance for testnet
@@ -266,22 +190,13 @@ Every 10000 blocks, the thread will save current emission in a file, by default,
  displayed on the front page, e.g., :
  
 ```
-Monero emission (fees) is 14485540.430 (52545.373) as of 1313448 block
+MoneroV emission (fees) is 144855404.30 (525453.73) as of 1313448 block
 ```
 
-The values given, can be checked using Monero daemon's  `print_coinbase_tx_sum` command. 
+The values given, can be checked using MoneroV daemon's  `print_coinbase_tx_sum` command. 
 For example, for the above example: `print_coinbase_tx_sum 0 1313449`.
  
 To disable the monitor, simply restart the explorer without `--enable-emission-monitor` flag. 
-
-## Enable JavaScript for decoding proving transactions
-
-By default, decoding and proving tx's outputs are done on the server side. To do this on the client side 
-(private view and tx keys are not send to the server) JavaScript-based decoding can be enabled:
-
-```
-xmrblocks --enable-js
-```
     
 ## Enable SSL (https)
 
@@ -309,11 +224,6 @@ for any practical use need to have properly issued ssl certificates.
 ## JSON API
 
 The explorer has JSON api. For the API, it uses conventions defined by [JSend](https://labs.omniti.com/labs/jsend).
-By default the api is disabled. To enable it, use `--enable-json-api` flag, e.g.,
-
-```
-./xmrblocks --enable-json-api
-```
 
 #### api/transaction/<tx_hash>
 
@@ -439,7 +349,7 @@ Result analogical to the one above.
 
 
 ```bash
-curl  -w "\n" -X GET "http://139.162.32.245:8081/api/block/1293257"
+curl  -w "\n" -X GET "http://122.112.5.45:8081/api/block/1293257"
 ```
 
 Partial results shown:
@@ -578,8 +488,8 @@ For this, we use recipient's address and our tx private key as a viewkey value,
 Checking outputs:
 
 ```bash
-# we use here official Monero project's donation address as an example
-curl  -w "\n" -X GET "http://127.0.0.1:8081/api/outputs?txhash=17049bc5f2d9fbca1ce8dae443bbbbed2fc02f1ee003ffdd0571996905faa831&address=44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A&viewkey=f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501&txprove=0"
+# we use here official MoneroV project's donation address as an example
+curl  -w "\n" -X GET "http://127.0.0.1:8081/api/outputs?txhash=17049bc5f2d9fbca1ce8dae443bbbbed2fc02f1ee003ffdd0571996905faa831&address=48kFo9fecQEW3Vz9XdpncuKrjNyKZSF5gLHAjmcoxmevJXBJB5EpV5b5SXf9EPyqGjVLziJVNvcAE93MEwMUzTicSfSqWrh&viewkey=f983431075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389990&txprove=0"
 ```
 
 ```json
@@ -785,31 +695,26 @@ var api_minor = response.data.api & 0xffff;
 
 #### api/rawblock/<block_number|block_hash>
 
-Return raw json block data, as represented in Monero.
+Return raw json block data, as represented in MoneroV.
 
 ```bash
-curl  -w "\n" -X GET "http://139.162.32.245:8081/api/rawblock/1293257"
+curl  -w "\n" -X GET "http://122.112.5.45:8081/api/rawblock/1293257"
 ```
 
 Example result not shown.
 
 #### api/rawtransaction/<tx_hash>
 
-Return raw json tx data, as represented in Monero.
+Return raw json tx data, as represented in MoneroV.
 
 ```bash
-curl  -w "\n" -X GET "http://139.162.32.245:8081/api/rawtransaction/6093260dbe79fd6277694d14789dc8718f1bd54457df8bab338c2efa3bb0f03d"
+curl  -w "\n" -X GET "http://122.112.5.45:8081/api/rawtransaction/6093260dbe79fd6277694d14789dc8718f1bd54457df8bab338c2efa3bb0f03d"
 ```
 
 Example result not shown.
 
-## Other monero examples
 
-Other examples can be found on  [github](https://github.com/moneroexamples?tab=repositories).
-Please know that some of the examples/repositories are not
-finished and may not work as intended.
+## Contribute
 
-## How can you help?
-
-Constructive criticism, code and website edits are always good. They can be made through github.
+Code contributions are always welocme. Simply fork and issue a pull request.
 
